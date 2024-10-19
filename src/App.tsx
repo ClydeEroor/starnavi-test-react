@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import useSWR from 'swr';
+import HeroList from './components/HeroList.tsx';
+import HeroItem from './components/HeroItem.tsx';
+import Pagination from './components/Pagination.tsx';
+import { FC, useState } from 'react';
+import { fetcher } from '../utils/fetchers.ts';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: FC = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
 
+  const { data: heroes, error } = useSWR(
+    `${import.meta.env.VITE_API_URL}/people?page=${currentPage}&limit=${ITEMS_PER_PAGE}`,
+    fetcher
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  if (error) return <div>Error loading data</div>;
+  if (!heroes) return <div>Loading...</div>;
+
+  const totalPages = Math.ceil(heroes.count / ITEMS_PER_PAGE);
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <HeroList>
+        {heroes.results.map((hero: any, idx: number) => (
+          <HeroItem id={hero.id} name={hero.name} key={`hero-item-${idx}`} />
+        ))}
+      </HeroList>
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
