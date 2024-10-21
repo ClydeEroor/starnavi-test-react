@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import ErrorPage from './routes/error.tsx';
-import Layout from './components/Layout.tsx';
-import Graphs from './pages/Graphs.tsx';
-import App from './App.tsx';
+import ErrorPage from './error.tsx';
+import Layout from '../components/Layout.tsx';
+import Graphs from '../pages/Graphs.tsx';
+import App from '../App.tsx';
+import React from 'react';
 
 export const router = createBrowserRouter([
   {

@@ -1,29 +1,29 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "target": "ES2022",
     "module": "ESNext",
+    "jsx": "react",
+    "useDefineForClassFields": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "types": ["@testing-library/jest-dom"],
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
+    "resolveJsonModule": true,
     "moduleDetection": "force",
     "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./src", // Set this to your source directory
+    "baseUrl": "./src",
     "paths": {
       "@/*": ["*"]
+    }
   },
-  "include": ["src"]}
+  "include": ["src/**/*", "src/tests/**/*"], // Убедитесь, что это правильно
+  "exclude": ["node_modules", "**/*.spec.ts",] // Про
 }

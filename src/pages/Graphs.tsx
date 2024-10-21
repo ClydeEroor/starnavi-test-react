@@ -1,17 +1,22 @@
-import { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   ReactFlow,
   addEdge,
   useEdgesState,
   useNodesState,
+  Connection,
+  Edge,
+  Node,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import useSWR from 'swr';
 import { fetcher } from '../../utils/fetchers.ts';
 import { Link, useSearchParams } from 'react-router-dom';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import { API_URL } from '../../constants';
+import { HeroProp, StarshipList } from '../../types';
 
-const initialNodes = [
+const initialNodes: Node[] = [
   {
     id: '1',
     data: { label: 'Hero' },
@@ -19,30 +24,34 @@ const initialNodes = [
   },
 ];
 
-const initialEdges: [] = [];
+const initialEdges: Edge[] = [];
 
-const Graphs = () => {
+const Graphs: React.FC = () => {
   const [searchParams] = useSearchParams();
   const heroId = searchParams.get('heroId');
 
-  const { data: heroData, error: heroError } = useSWR(
-    `${import.meta.env.VITE_API_URL}/people/${heroId}`,
+  const { data: heroData, error: heroError } = useSWR<HeroProp>(
+    `${API_URL}/people/${heroId}`,
     fetcher
   );
 
+
+
   const filmIds = heroData?.films.join(',');
-  const { data: starShipData, error: starShipError } = useSWR(
+
+  const { data: starShipData, error: starShipError } = useSWR<StarshipList>(
     filmIds
-      ? `${import.meta.env.VITE_API_URL}/starships/?films__in=${filmIds}&pilots=${heroId}`
+      ? `${API_URL}/starships/?films__in=${filmIds}&pilots=${heroId}`
       : null,
     fetcher
   );
+
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
-    (connection: any) => setEdges((eds: any) => addEdge(connection, eds)),
+    (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
     [setEdges]
   );
 
@@ -50,7 +59,7 @@ const Graphs = () => {
     index: number,
     baseY: number,
     step: number
-  ) => {
+  ): number => {
     return baseY + index * step;
   };
 
@@ -80,7 +89,7 @@ const Graphs = () => {
       }));
 
       setNodes((nds) => [...nds, ...filmNodes]);
-      setEdges((eds: any) => [...eds, ...filmEdges]);
+      setEdges((eds) => [...eds, ...filmEdges]);
     }
   }, [heroData, setNodes, setEdges]);
 

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { FC, PropsWithChildren } from 'react';
 import { Outlet } from 'react-router-dom';
 
