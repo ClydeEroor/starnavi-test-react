@@ -12,12 +12,10 @@ const App: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 10;
 
-  const {
-    data: heroes ,
-    error,
-  } = useSWR<HeroListProp>(`${API_URL}/people?page=${currentPage}&limit=${ITEMS_PER_PAGE}`, fetcher);
-
-
+  const { data: heroes, error } = useSWR<HeroListProp>(
+    `${API_URL}/people?page=${currentPage}&limit=${ITEMS_PER_PAGE}`,
+    fetcher
+  );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
