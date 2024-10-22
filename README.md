@@ -1,73 +1,37 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite + React Flow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+This project provides detailed information about a hero. When you click on a specific hero, a graph is displayed, showing:
+- The main node representing the selected hero.
+- Connections from the hero to the films in which they appear.
+- Connections from each film to the starships that the hero traveled on.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
 
-## Expanding the ESLint configuration
+To get started with the project, you need to have Node.js installed on your machine. Once you have Node.js, you can follow these steps:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ClydeEroor/starnavi-test-react
+   cd starnavi-react
 
-- Configure the top-level `parserOptions` property like this:
+## Installation and Running
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+To install dependencies, run the following command:
+
+```bash
+npm i
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+To run app the following command:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev
 ```
-# starnavi-test-react
 
+To test app the following command:
 
-
-
-Детальна інформація про героя: При кліку на конкретного героя відображайте детальну інформацію у вигляді графа, де:
-Головна нода - обраний герой.
-Від героя ведуть зв'язки до фільмів, у яких він з'являється.
-Від кожного фільму ведуть зв'язки до космічних кораблів, на яких герой подорожував.
-
-HERO -> FILM -> Vehicles
-
-
-
-
-
-
-
-
-
-
-
-
+```bash
+npm run test
+```
