@@ -78,7 +78,6 @@ describe('Graphs Component', () => {
   });
 
   test('renders hero and starship nodes correctly after data fetch', async () => {
-    // Мокируем ответ для героя
     mockedAxios.get.mockImplementation((url) => {
       if (url.includes('/people/1')) {
         return Promise.resolve({ data: mockHeroData });
@@ -88,8 +87,6 @@ describe('Graphs Component', () => {
       }
       return Promise.reject(new Error('not found'));
     });
-
-    // Мокируем параметры поиска
 
     await act(async () => {
       render(
@@ -102,17 +99,14 @@ describe('Graphs Component', () => {
     });
 
     await waitFor(() => {
-      // Проверяем, что имя героя отображается
       expect(
         screen.getByText(`Hero: ${mockHeroData.name}`)
       ).toBeInTheDocument();
 
-      // Проверяем, что фильмы отображаются
       mockHeroData.films.forEach((film) => {
         expect(screen.getByText(`Film ${film}`)).toBeInTheDocument();
       });
 
-      // Проверяем, что звездолеты отображаются
       mockStarShipData.results.forEach((starship) => {
         expect(
           screen.getByText(`Starship: ${starship.name}`)
