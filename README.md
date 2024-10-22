@@ -13,7 +13,7 @@ To get started with the project, you need to have Node.js installed on your mach
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/ClydeEroor/starnavi-test-react
+   git clone https://github.com/ClydeEroor/starnavis-test-react
    cd starnavi-react
 
 ## Installation and Running
