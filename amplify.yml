@@ -10,7 +10,6 @@ frontend:
       commands:
         - npm ci --cache .npm --prefer-offline
         - npm run build
-        - npm run preview
   artifacts:
     baseDirectory: ./dist
     files:
