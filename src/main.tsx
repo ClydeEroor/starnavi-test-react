@@ -8,7 +8,7 @@ import Loading from './components/Loading.tsx';
 import React from 'react';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} fallbackElement={<Loading />} />
-  </StrictMode>
+ <StrictMode>
+  <RouterProvider router={router} fallbackElement={<Loading />} />
+ </StrictMode>,
 );
